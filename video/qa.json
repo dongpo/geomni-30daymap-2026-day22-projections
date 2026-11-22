@@ -1,0 +1,18 @@
+{
+  "seconds": 32,
+  "resolution": [
+    1154,
+    1080
+  ],
+  "encoded_fps": 30,
+  "captured_frames": 1717,
+  "capture": "Actual browser screenshots timestamped during UI operations; no synthesized map frames",
+  "audio": "none; map has no sound",
+  "max_capture_gap_seconds": 0.4570000000000001,
+  "sha256": "aa2cb68175fe39650e3aff8b094c59c668a950282f3e0f6431dbb65ddc77bc25",
+  "decode": "PASS",
+  "morph_max_capture_gap_seconds": 0.037,
+  "visual_check": "Encoded samples at 1,3,7,11,15,19,23,27,31 seconds opened; actual browser player confirmed duration/dimensions and playback.",
+  "padding": "1 right-side pixel added; no stretch",
+  "review_status": "PENDING_USER_REVIEW"
+}

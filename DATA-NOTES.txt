@@ -1,0 +1,29 @@
+Day22 Projections v2 — 2026-11-22 經使用者授權公開；文章仍供審閱
+全球 Equal Earth／Mercator 同源對照；保留亞洲三投影案例。
+
+資料：Natural Earth 1:110m admin_0 countries，公開領域。
+下載：https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson
+授權：https://www.naturalearthdata.com/about/terms-of-use/
+下載日期：2026-11-22。master 未固定發行版本；以保存原檔與 SHA256 識別：
+6866c877d39cba9c357620878839b336d569f8c662d3cfab4cb1dbe2d39c977f
+
+方法：pyproj／PROJ WGS84 橢球，+proj=merc 與 +proj=eqearth，中央經線0度。
+共同裁切緯度南60至北85度，排除南極洲及 Seven seas 分類；175筆地物。
+原輪廓加密至最大0.2度後，分別計算橢球地表面積與投影平面面積；並非增加原始圖資精度。
+兩圖共用投影公里／像素尺度。CONTINENT分類沿用來源，跨洲國家未拆分，不能當成官方各洲面積統計。
+非洲與格陵蘭地表面積比13.5685；Mercator圖面比0.92028；Equal Earth圖面比13.56846。
+Equal Earth各地物最大面積相對誤差0.005041%，通過每筆小於0.1%門檻。
+上述數字限本份概括輪廓與裁切範圍，不等於官方面積。格陵蘭作島嶼比較，不是獨立洲。
+
+互動：可選洲或點選輪廓、切回非洲與格陵蘭；拉桿與播放用兩套投影座標作視覺內插。
+中間狀態不是正式地圖投影；統計固定為兩端投影，過渡時明示。非時間變化或領土變化。
+亞洲案例保留原資料與程式，預設雅庫茨克及全部500km圈；詳asia/DATA-NOTES.txt。
+
+聯合國：A/RES/80/307，2026-09-04 Correct the Map決議。
+https://mandates.un.org/mandate/A/RES/80/307?subject=Cartography
+重點是相對面積及代表性；不可描述成所有用途禁止Mercator。
+Equal Earth技術：https://proj.org/en/stable/operations/projections/eqearth.html
+
+重現：在本專案根目錄執行 python scripts/build.py。
+前端為原生HTML/Canvas，world.js已包含預計算輪廓，開啟index.html即可使用；無CDN依賴。
+驗收數據見evidence/qa.json。未實測手機效能與動畫FPS，不宣稱全平台流暢。

@@ -1,0 +1,21 @@
+{
+  "features": 175,
+  "max_equal_area_relative_error": 5.0400320717125524e-05,
+  "africa_km2": [
+    29945332.65701795,
+    33372857.11679149,
+    29945292.945213355
+  ],
+  "greenland_km2": [
+    2206968.6946252836,
+    36263735.89026582,
+    2206977.457912471
+  ],
+  "africa_greenland_ratios": [
+    13.568535308155925,
+    0.9202818269407724,
+    13.568463437564022
+  ],
+  "sha256": "6866c877d39cba9c357620878839b336d569f8c662d3cfab4cb1dbe2d39c977f",
+  "assertions": "Equal Earth area error <0.1% each source feature; same geometry and clipped latitude extent for both projections"
+}

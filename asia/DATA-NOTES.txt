@@ -1,0 +1,20 @@
+Day22 Projections｜同樣五百公里，為什麼變大了？
+2026-11-21 實際製作，製作紀錄；2026-11-22隨Day22公開。
+
+資料：Natural Earth 1:110m land。沿用 outputs/day13-typhoons-v15/source/ne_110m_land.geojson 的已保存原始GeoJSON，複製到source/land.geojson並保存SHA256。該保存檔沒有可確認的上游release版號，不聲稱最新版本；本次可重現版本由檔案雜湊識別。
+官網：https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/
+授權 public domain：https://www.naturalearthdata.com/about/terms-of-use/ （2026-11-21已讀）
+投影定義：https://proj.org/en/stable/operations/projections/merc.html 、https://proj.org/en/stable/operations/projections/laea.html
+
+範圍25°E–180°E、15°S–75°N，裁切47個多邊形，不代表亞洲政治全域。來源是概括海岸，不適合精確局部邊界分析。本圖僅陸地，不以國界表達領土。城市座標為近似示範中心點，明列於scripts/build.py，非另行取得的官方POI。
+
+WGS84橢球，三投影為橢球麥卡托、臺北中心LAEA、臺北中心AEQD；完整PROJ字串見evidence/qa.json。不是Web Mercator。使用pyproj/PROJ轉換真實陸地與經緯網，以Geod.fwd每2°方位取一點建立地表500km等距圈；沒有把經緯度平面buffer當公里。圈為有限範圍示範，不是無限小Tissot指示橢圓。
+
+面積倍率：Shapely投影平面多邊形面積／Geod.polygon_area_perimeter WGS84測地面積。局部角度最大變形由Proj.get_factors取得，度。圈面積是有限圓周近似，角度數值是中心的局部性質，兩者不可混為一談。
+距離是臺北到示範點的投影平面直線對Geod.inv測地最短距離；虛線不是道路、航線或投影後測地路徑。AEQD只承諾中心到各點，不推論其他任意兩點。三圖同一公里/像素比例，僅平移置中，沒有各自fit造成比例差。
+LAEA對八個有限圈的面積比誤差<0.01%；AEQD對七條非零中心距離相對誤差<0.0001%；所有座標有限，腳本assert通過。圈邊界採離散頂點，有限精度及概括地形仍保留限制。
+
+圖面：瀏覽器原生SVG，無網路底圖或金鑰。選單/城市點切換選取、全圈比較、臺北中心距離模式；沒有自由平移縮放，維持三圖共同尺度。手機窄畫面直排三圖，尚未做手機實機效能驗證。瀏覽器實測雅庫茨克、新加坡及兩按鈕，保存真實PNG；檔案不是AI生成地圖。
+重現：Python3.11環境安裝requirements-lock.txt，python scripts/build.py。用HTTP伺服器開index.html，或一般瀏覽器離線開啟HTML（部分受管制瀏覽器禁止file協定）。
+
+技術故事與Geomni/GeoAI價值：把地理計算與視覺印象分開驗證。相同資料若任由各圖自動填滿畫框，投影的實際面積差異會被額外縮放掩蓋，因此固定平面尺度。AI能協助寫程式與敘事，但投影選擇仍必須服從欲比較的關係，不能用漂亮外觀替代保形、等積、等距條件。本案保留數值與程式讓讀者查核，沒有宣稱模型自動理解地理。
